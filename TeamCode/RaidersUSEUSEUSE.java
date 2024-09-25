@@ -14,3 +14,4 @@ private DcMotor motor3botleft;
 @Override
 public void runOpMode() {
 motor1leftmotor = hardwareMap.get(DcMotor.class, "motor 1/left motor"
+        motor0rightmotor = hardwareMap.get(DcMotor.class), "motor 1/right motor"
