@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;/* Copyright (c) 2021 FIRST. All rights r
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -77,8 +78,8 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
         // to the names assigned during the robot configuration step on the DS or RC devices.
         DcMotor motor1leftmotor = hardwareMap.get(DcMotor.class, "motor 1/left motor");
         DcMotor motor0rightmotor = hardwareMap.get(DcMotor.class, "motor 0/right motor");
-        DcMotor motor3botright = hardwareMap.get(DcMotor.class, "motor 3/botRight motor");
-        DcMotor motor2botleft = hardwareMap.get(DcMotor.class, "motor 2/botLeft motor");
+        DcMotor motor2botright = hardwareMap.get(DcMotor.class, "motor 3/botRight motor");
+        DcMotor motor3botleft = hardwareMap.get(DcMotor.class, "motor 2/botLeft motor");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -90,10 +91,10 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.// e.setDirection(DcMotor.Direction.REVERSE);
-        motor1leftmotor.setDirection(DcMotor.Direction.REVERSE);
-        motor2botleft.setDirection(DcMotor.Direction.REVERSE);
+        motor1leftmotor.setDirection(DcMotor.Direction.FORWARD);
+        motor3botleft.setDirection(DcMotor.Direction.REVERSE);
         motor0rightmotor.setDirection(DcMotor.Direction.FORWARD);
-       motor3botright.setDirection(DcMotor.Direction.FORWARD);
+       motor2botright.setDirection(DcMotor.Direction.FORWARD);
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -113,15 +114,15 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double motor1leftMotorPower = axial + lateral + yaw;
-            double motor2botLeftpower = axial - lateral - yaw;
+            double motor3botLeftpower = axial - lateral - yaw;
             double motor0rightMotorPower = axial - lateral + yaw;
-            double motor3botRightpower = axial + lateral - yaw;
+            double motor2botRightpower = axial + lateral - yaw;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
             max = Math.max(Math.abs(motor1leftMotorPower), Math.abs(motor0rightMotorPower));
-            max = Math.max(max, Math.abs(motor2botLeftpower));
-            Math.max(max, Math.abs(motor3botRightpower));
+            max = Math.max(max, Math.abs(motor3botLeftpower));
+            Math.max(max, Math.abs(motor2botRightpower));
 
             // This is test code:
             //
@@ -134,24 +135,24 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
             // Once the correct motors move in the correct direction re-comment this code.
 
             motor1leftMotorPower  = gamepad1.left_stick_y; double v1 = 1.0;  double v2 = 0.0;
-            motor2botLeftpower = gamepad1.left_stick_y; double v3 = 1.0;  double v8 = 0.0;
+            motor3botLeftpower = gamepad1.left_stick_y; double v3 = 1.0;  double v8 = 0.0;
             motor0rightMotorPower = gamepad1.right_stick_y; double v4 = 1.0;  double v7 = 0.0;
-            motor3botRightpower  = gamepad1.right_stick_y;   double v5  = 0.0;  double v6 = 0.0;
+            motor2botRightpower  = gamepad1.right_stick_y;   double v5  = 0.0;  double v6 = 0.0;
 
 
             // Send calculated power to wheels
             motor1leftmotor.setPower(motor1leftMotorPower);
             motor0rightmotor.setPower(motor0rightMotorPower);
-            motor2botleft.setPower(motor2botLeftpower);
-            motor3botright.setPower(motor3botRightpower);
+            motor3botleft.setPower(motor3botLeftpower);
+            motor2botright.setPower(motor2botRightpower);
 
             // Show the elapsed game time and wheel power.
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime);
             telemetry.addData("Front left", motor1leftmotor);
             telemetry.addData("Front right", motor0rightmotor);
-            telemetry.addData("Back  left", motor2botLeftpower);
-            telemetry.addData("Back right", motor3botRightpower);
+            telemetry.addData("Back  left", motor3botLeftpower);
+            telemetry.addData("Back right", motor2botRightpower);
             telemetry.update();
         }
     }}
