@@ -77,8 +77,8 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
         // to the names assigned during the robot configuration step on the DS or RC devices.
         DcMotor motor1leftmotor = hardwareMap.get(DcMotor.class, "motor 1/left motor");
         DcMotor motor0rightmotor = hardwareMap.get(DcMotor.class, "motor 0/right motor");
-        DcMotor motor3botright = hardwareMap.get(DcMotor.class, "motor 2/botRight motor");
-        DcMotor motor2botleft = hardwareMap.get(DcMotor.class, "motor 3/botLeft motor");
+        DcMotor motor3botright = hardwareMap.get(DcMotor.class, "motor 3/botRight motor");
+        DcMotor motor2botleft = hardwareMap.get(DcMotor.class, "motor 2/botLeft motor");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
