@@ -92,7 +92,7 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.// e.setDirection(DcMotor.Direction.REVERSE);
         motor1leftmotor.setDirection(DcMotor.Direction.FORWARD);
-        motor3botleft.setDirection(DcMotor.Direction.REVERSE);
+        motor3botleft.setDirection(DcMotor.Direction.FORWARD);
         motor0rightmotor.setDirection(DcMotor.Direction.FORWARD);
        motor2botright.setDirection(DcMotor.Direction.FORWARD);
         // Wait for the game to start (driver presses START)
