@@ -31,8 +31,9 @@ package org.firstinspires.ftc.teamcode;/* Copyright (c) 2021 FIRST. All rights r
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -66,7 +67,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="raidedThisCode", group="Linear OpMode")
-public class codeRaidersFTC20242025 extends LinearOpMode {
+class codeRaidersFTC20242025 extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private final ElapsedTime runtime = new ElapsedTime();
@@ -94,7 +95,7 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
         motor1leftmotor.setDirection(DcMotor.Direction.REVERSE);
         motor3botleft.setDirection(DcMotor.Direction.FORWARD);
         motor0rightmotor.setDirection(DcMotor.Direction.FORWARD);
-       motor2botright.setDirection(DcMotor.Direction.FORWARD);
+        motor2botright.setDirection(DcMotor.Direction.FORWARD);
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -107,9 +108,9 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x;
+            double axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            double lateral = gamepad1.left_stick_x;
+            double yaw = gamepad1.right_stick_x;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -134,10 +135,18 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
             //      the setDirection() calls above.
             // Once the correct motors move in the correct direction re-comment this code.
 
-            motor1leftMotorPower  = gamepad1.left_stick_y; double v1 = 1.0;  double v2 = 0.0;
-            motor3botLeftpower = gamepad1.left_stick_y; double v3 = 1.0;  double v8 = 0.0;
-            motor0rightMotorPower = gamepad1.right_stick_y; double v4 = 1.0;  double v7 = 0.0;
-            motor2botRightpower  = gamepad1.right_stick_y;   double v5  = 0.0;  double v6 = 0.0;
+            motor1leftMotorPower = gamepad1.left_stick_y;
+            double v1 = 1.0;
+            double v2 = 0.0;
+            motor3botLeftpower = gamepad1.left_stick_y;
+            double v3 = 1.0;
+            double v8 = 0.0;
+            motor0rightMotorPower = gamepad1.right_stick_y;
+            double v4 = 1.0;
+            double v7 = 0.0;
+            motor2botRightpower = gamepad1.right_stick_y;
+            double v5 = 0.0;
+            double v6 = 0.0;
 
 
             // Send calculated power to wheels
@@ -156,3 +165,54 @@ public class codeRaidersFTC20242025 extends LinearOpMode {
             telemetry.update();
         }
     }}
+@TeleOp(name="raidedThisCode", group="Linear OpMode")
+public class CodeRaidersFTC20242025 extends LinearOpMode
+
+{
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+    }
+    public class servos extends LinearOpMode {
+
+        private DcMotor arm0;
+        private CRServo middlearm;
+        private Servo topmiddlearm;
+
+        /**
+         * This sample contains the bare minimum Blocks for any regular OpMode. The 3 blue
+         * Comment Blocks show where to place Initialization code (runs once, after touching the
+         * DS INIT button, and before touching the DS Start arrow), Run code (runs once, after
+         * touching Start), and Loop code (runs repeatedly while the OpMode is active, namely not
+         * Stopped).
+         */
+        @Override
+        public void runOpMode() {
+            arm0 = hardwareMap.get(DcMotor.class, "arm0");
+            middlearm = hardwareMap.get(CRServo.class, "middlearm");
+            topmiddlearm = hardwareMap.get(Servo.class, "topmiddlearm");
+
+            // Put initialization blocks here.
+            waitForStart();
+            // Put run blocks here.
+            while (opModeIsActive()) {
+                // Put loop blocks here.
+                telemetry.update();
+                if (opModeIsActive()) {
+                    arm0.setPower(gamepad2.left_stick_y);
+                    middlearm.setPower(gamepad2.right_stick_y);
+                }
+                if (gamepad2.y) {
+                    topmiddlearm.setPosition(0.4);
+                }
+                if (gamepad2.b) {
+                    topmiddlearm.setPosition(0);
+                }
+                if (gamepad2.x) {
+                    topmiddlearm.setPosition(0.45);
+                }
+                if (gamepad2.a) {
+                    topmiddlearm.setPosition(0.6);
+                }
+            }
+        }}}
